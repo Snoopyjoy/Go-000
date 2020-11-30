@@ -3,6 +3,8 @@ package dao
 import (
 	"context"
 	"database/sql"
+	"fmt"
+
 	"github.com/pkg/errors"
 )
 
@@ -16,7 +18,7 @@ func FindUserByID(ctx context.Context, ID uint64) (*User, error) {
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			// sql.ErrNoRows改为dao内部的sentinel err, 屏蔽底层数据库实现
-			return nil, ErrNotFound
+			return nil, errors.WithMessage(ErrNotFound, fmt.Sprintf("%d not exists", ID))
 		}
 		return nil, errors.Wrapf(err, "find user [%d] err", ID)
 	}

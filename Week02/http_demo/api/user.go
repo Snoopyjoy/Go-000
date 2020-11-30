@@ -33,7 +33,7 @@ func (h *UserHandler) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			// 接口层处理err
 			// 日志打印
-			fmt.Printf("find user [%d] failed %+v\n", id, err)
+			fmt.Printf("find user failed %+v\n", err)
 
 			if errors.Is(err, dao.ErrNotFound) {
 				// 判断是否为记录不存在

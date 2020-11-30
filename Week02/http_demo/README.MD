@@ -9,7 +9,7 @@
 2. service 业务逻辑层
 3. api 接口层  
 
-DAO 报sql.ErrNoRows时，直接return一个预定义在dao层里的sentinel err。  
+DAO 报sql.ErrNoRows时，return 一个预定义在dao层里的sentinel err 并用WithMessage携带具体信息。  
 DAO 报其他错误时，Wrap错误后抛给上层  
 service 层调用dao报错时直接返回错误给上层
 service 层如果需要对未找到记录的err做特殊处理则通过errors.Is判断后处理，并吞掉这个错误
